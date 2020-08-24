@@ -1,9 +1,17 @@
-// #include <string>
+#include <string>
+#include <vector>
 
-// class Menu {
-//     public:
-//         int rows, cols;
-//         std::string title;
-//         Window(int paddingX, int paddingY, std::string titleInput);
-//         void draw();
-// };
+typedef void (*MenuFunctionPtr) (void);
+
+struct MenuOption {
+    std::string text;
+    MenuFunctionPtr m_function;
+};
+
+class Menu {
+    public:
+        int currentSelection;
+        std::vector<MenuOption> options;
+        Menu(std::vector<MenuOption> ops);
+
+};

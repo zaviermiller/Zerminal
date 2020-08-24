@@ -4,6 +4,7 @@
 #include <sys/ioctl.h> //ioctl() and TIOCGWINSZ
 #include <unistd.h> // for STDOUT_FILENO
 #include "Window.h"
+#include "Menu.h"
 
 #define goto(x,y) printf("\033[%d;%dH", (y), (x))
 
@@ -72,4 +73,8 @@ void Window::draw() {
 			printf("┛");
 		}
 	}
-}	
+}
+
+void Window::setMenu(Menu newMenu) {
+	this->menu = &newMenu;
+}
