@@ -4,13 +4,13 @@
 #include <sys/ioctl.h> //ioctl() and TIOCGWINSZ
 #include <unistd.h> // for STDOUT_FILENO
 #include "Window.h"
-#include "Menu.h"
-
-#define goto(x,y) printf("\033[%d;%dH", (y), (x))
+#include "draw_helpers.h"
 
 struct termios orig;
 
 void disableRaw() {
+	system("clear");
+	
 	tcsetattr(STDIN_FILENO, TCSAFLUSH, &orig);
 	printf("\e[?25h");
 }
@@ -33,6 +33,8 @@ Window::Window(int paddingX = 0, int paddingY = 0, std::string titleInput = "") 
 	ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
 	enableRaw();
 	title = titleInput;
+	tWidth = w.ws_col;
+	tHeight = w.ws_row;
 	rows = w.ws_row - (paddingY);
 	cols = w.ws_col - (paddingX * 2);
 	offsetX = paddingX;
@@ -73,8 +75,17 @@ void Window::draw() {
 			printf("┛");
 		}
 	}
+
+	// draw menu (if it exists)
+	if (&menu != NULL) {
+		menu.draw(tWidth, tHeight);
+	}
 }
 
 void Window::setMenu(Menu newMenu) {
-	this->menu = &newMenu;
+	menu = newMenu;
 }
+
+// void Window::showMenu() {
+
+// }

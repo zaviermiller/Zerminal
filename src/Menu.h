@@ -13,5 +13,9 @@ class Menu {
         int currentSelection;
         std::vector<MenuOption> options;
         Menu(std::vector<MenuOption> ops);
+        Menu();
+        void draw(int width, int height);
+        void up();
+        void down();
 
 };

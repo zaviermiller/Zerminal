@@ -1,11 +1,11 @@
 #include <iostream>
 #include <vector>
-#include "Window.h"
+#include "../Zerminal.h"
 
-#define KEY_UP 72
-#define KEY_DOWN 80
-#define KEY_LEFT 75
-#define KEY_RIGHT 77
+#define KEY_UP 65
+#define KEY_DOWN 66
+#define KEY_LEFT 67
+#define KEY_RIGHT 68
 
 void handle1() {
 	std::cout << "test";
@@ -18,20 +18,31 @@ void handle2() {
 }
 
 int main() {
-	char inp;
-	Window window(2,1,"Zerminal");
-	Menu mainMenu(std::vector<MenuOption>({{"Test1", handle1}, {"Test2", handle2}}));
+	char c,d,e;
+	Window window(40, 6,"Bank of Z");
+	Menu mainMenu(std::vector<MenuOption>({{"Withdrawal     ", handle1}, {"Check balance  ", handle2}, {"Settings       ", handle2}}));
 	window.setMenu(mainMenu);
-	// window.listen()
+	// window.showMenu()
 
-	while (inp != 'q') {
-		// switch(inp) {
-		// 	case KEY_UP:
-
-		// }
+	while (c != 'q') {
+		if ((c == 27) && (d == 91)) {
+			switch(e) {
+				case KEY_UP:
+					window.menu.up();
+					break;
+				case KEY_DOWN:
+					window.menu.down();
+					break;
+				default:
+					std::cout << std::to_string(e);
+			}
+		} else {
+		}
 
 		window.draw();
-		std::cin >> inp;
+		std::cin >> c;
+		std::cin >> d;
+		std::cin >> e;
 	}
 	
 
