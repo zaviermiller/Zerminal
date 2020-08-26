@@ -19,30 +19,37 @@ void handle2() {
 
 int main() {
 	char c,d,e;
-	Window window(40, 6,"Bank of Z");
-	Menu mainMenu(std::vector<MenuOption>({{"Withdrawal     ", handle1}, {"Check balance  ", handle2}, {"Settings       ", handle2}}));
+	zerminal::Window window(10, 2,"Zannalysis");
+	zerminal::Menu mainMenu(std::vector<zerminal::MenuOption>({{"Check inventory", handle1}, {"Check balance  ", handle2}, {"Settings       ", handle2}}));
 	window.setMenu(mainMenu);
-	// window.showMenu()
+	// KeyCommands kc(std::vector<KeyFunc>({'a', handle1}), 'p');
+	// window.
+	// window.showHints()
 
 	while (c != 'q') {
-		if ((c == 27) && (d == 91)) {
-			switch(e) {
-				case KEY_UP:
-					window.menu.up();
-					break;
-				case KEY_DOWN:
-					window.menu.down();
-					break;
-				default:
-					std::cout << std::to_string(e);
+		if (c == 27) {
+			std::cin >> d;
+			if (d == 91) {
+				std::cin >> e;
+				switch(e) {
+					case KEY_UP:
+						window.menu.up();
+						break;
+					case KEY_DOWN:
+						window.menu.down();
+						break;
+					default:
+						std::cout << std::to_string(e);
+				}
 			}
+		} else if (c == '\n') {
+			window.menu.executeActiveFunc();
 		} else {
+			std::cout << c;
 		}
 
 		window.draw();
-		std::cin >> c;
-		std::cin >> d;
-		std::cin >> e;
+		c = getchar();
 	}
 	
 
