@@ -1,0 +1,5 @@
+namespace zerminal {
+    class screen {
+        
+    };
+};
