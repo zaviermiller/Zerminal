@@ -24,7 +24,7 @@ namespace zerminal {
                     printf(x.c_str());
                 }
             }
-            printf((std::to_string(i + 1) + ". " + currentOption.text + " ").c_str());
+            printf((" " + std::to_string(i + 1) + ". " + currentOption.text + " ").c_str());
             reset();
         }
     }
